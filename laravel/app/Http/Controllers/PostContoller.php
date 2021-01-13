@@ -12,7 +12,7 @@ class PostContoller extends Controller
     }
 
     public function create() {
-
+        return view('posts.create');
     }
 
     public function show() {
