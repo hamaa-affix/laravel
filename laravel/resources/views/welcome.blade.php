@@ -69,6 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        {{Auth::user()->name}}
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -93,7 +94,9 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                    @if(Auth::user())
                     <a href="{{ route('users.show_profile', ['user' => Auth::user()->id]) }}">profile</a>
+                    @endif
                 </div>
             </div>
         </div>
