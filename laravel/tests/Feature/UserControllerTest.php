@@ -25,12 +25,12 @@ class UserControllerTest extends TestCase
 
     public function testshowProfile()
     {
-				$user_data = factory(User::class, 5)->create();
-				$user = $user_data->first();
+        $user_data = factory(User::class, 5)->create();
+        $user = $user_data->first();
         $this->actingAs($user);
         $response = $this->get(route('users.show_profile', ['user' => $user->id]))
-													->assertOk()
-													->assertSee($user->name);
+                            ->assertOk()
+                            ->assertSee($user->name);
     }
 
 }
