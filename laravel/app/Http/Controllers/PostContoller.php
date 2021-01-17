@@ -1,14 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
-use App\Post;
+// use App\User;
+// use App\Post;
 use Illuminate\Http\Request;
+use App\Services\PostService;
 
 class PostContoller extends Controller
 {
-    public function index() {
+    private $post_service;
 
+    public function __construct(PostService $post_service)
+    {
+        $this->post_service = $post_service;
+    }
+
+    public function index()
+    {
+        $post_list = $this->post_service->getlist();
+        dd($post_list);
     }
 
     public function create() {

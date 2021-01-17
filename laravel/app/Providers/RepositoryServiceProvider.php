@@ -15,9 +15,18 @@ class RepositoryServiceProvider extends ServiceProvider
             //\App\Repository\User\UserEQRepository::class,
             \App\Repository\User\UserQBRepository::class,
             //post repository container
-            \App\Repository\Post\PostRepositoyInterface::class,
-            \App\Repository\Post\PostEQrepositoy::class,
+            // \App\Repository\Post\PostRepositoyInterface::class,
+            // \App\Repository\Post\PostEQrepositoy::class,
             //\App\Repository\Post\PostQBRepositoty::class,
+        );
+        $this->app->bind(
+            // サービスプロバイダメソッド中であれば、いつでも$appプロパティを利用でき、サービスコンテナへアクセスできます。
+            \App\Services\PostDataAccess::class, function ($app) {
+                return new \App\Repository\Post\PostEQRepositoy(
+                    new \App\Post,
+                    new \App\Entities\PostList
+                );
+            }
         );
     }
 
