@@ -27,3 +27,7 @@ Route::get('/users/{user}', 'UserContoller@showProfile')->name('users.show_profi
 Route::get('/posts', 'PostContoller@index')->name('posts.index');
 Route::get('/posts/create/', 'PostContoller@create')->name('posts.creat');
 Route::post('/posts/{posts}', 'PostContoller@store')->name('posts.store');
+
+
+//test route
+Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
