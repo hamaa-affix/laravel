@@ -178,6 +178,7 @@ return [
          * Repository Servise Providers....
          */
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\PostServiceProvider::class,
 
     ],
 

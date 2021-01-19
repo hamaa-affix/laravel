@@ -24,6 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/{user}', 'UserContoller@showProfile')->name('users.show_profile');
 
 //post router
-Route::get('/posts', 'PostController@index')->name('posts.index');
+Route::get('/posts', 'PostContoller@index')->name('posts.index');
 Route::get('/posts/create/', 'PostContoller@create')->name('posts.creat');
-Route::post('/posts/{posts}', 'PostController@store')->name('posts.store');
+Route::post('/posts/{posts}', 'PostContoller@store')->name('posts.store');
