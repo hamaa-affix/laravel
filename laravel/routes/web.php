@@ -19,6 +19,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+//demo-app route
+// Route::prefix('mypage')
+//     ->namespace('MyPage')
+//     ->middleware('auth')
+//     ->group( function() {
+//         Route::get('edit-profile', 'ProfileCotroller@showProfileEditForm')->name('mypage.edit-profile');
+//     });
+
+Route::prefix('mypage')
+    ->namespace('MyPage')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('edit-profile', 'ProfileController@showProfileEditForm')->name('mypage.edit-profile');
+        Route::post('edit-profile', 'ProfileController@editProfile')->name('mypage.edit-profile');
+    });
+
+
 //userprofile router
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/{user}', 'UserContoller@showProfile')->name('users.show_profile');
