@@ -28,7 +28,11 @@
                     <span class="avatar-form image-picker">
                         <input type="file" name="avatar" class="d-none" accept="image/png,image/jpeg,image/gif" id="avatar" />
                         <label for="avatar" class="d-inline-block">
+                        @if ($user->avatar_file_name)
+                            <img src="/storage/avatars/{{$user->avatar_file_name}}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                        @else
                             <img src="/images/avatar-default.svg" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                        @endif
                         </label>
                     </span>
 
@@ -52,4 +56,16 @@
             </div>
         </div>
     </div>
+
+<script>
+document.querySelector('.image-picker input')
+      .addEventListener('change', (e) => {
+          const input = e.target;
+          const reader = new FileReader();
+          reader.onload = (e) => {
+              input.closest('.image-picker').querySelector('img').src = e.target.result
+          };
+          reader.readAsDataURL(input.files[0]);
+      });
+</script>
 @endsection
