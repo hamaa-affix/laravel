@@ -25,6 +25,7 @@ class EditRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:225'],
+            'avatar' => ['file', 'image'],
         ];
     }
 }
