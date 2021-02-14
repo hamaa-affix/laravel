@@ -36,6 +36,10 @@ Route::prefix('mypage')
         Route::post('edit-profile', 'ProfileController@editProfile')->name('mypage.edit-profile');
     });
 
+Route::prefix('auth')
+        ->group(function () {
+            Route::get('sell', 'SellController@showSellForm')->name('sell');
+        });
 
 //userprofile router
 Route::get('/home', 'HomeController@index')->name('home');
