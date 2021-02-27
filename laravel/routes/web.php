@@ -19,14 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-//demo-app route
-// Route::prefix('mypage')
-//     ->namespace('MyPage')
-//     ->middleware('auth')
-//     ->group( function() {
-//         Route::get('edit-profile', 'ProfileCotroller@showProfileEditForm')->name('mypage.edit-profile');
-//     });
+Route::middleware('auth')
+->group(function () {
+    Route::get('sell', 'SellController@showSellForm')->name('sell');
+});
 
 Route::prefix('mypage')
     ->namespace('MyPage')
@@ -35,11 +31,6 @@ Route::prefix('mypage')
         Route::get('edit-profile', 'ProfileController@showProfileEditForm')->name('mypage.edit-profile');
         Route::post('edit-profile', 'ProfileController@editProfile')->name('mypage.edit-profile');
     });
-
-Route::prefix('auth')
-        ->group(function () {
-            Route::get('sell', 'SellController@showSellForm')->name('sell');
-        });
 
 //userprofile router
 Route::get('/home', 'HomeController@index')->name('home');
