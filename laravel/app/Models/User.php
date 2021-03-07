@@ -40,4 +40,9 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany('App\Post', 'foreig_key');
     }
+
+    public function soldItems()
+    {
+        return $this->hasMany(Item::class, 'seller_id');
+    }
 }

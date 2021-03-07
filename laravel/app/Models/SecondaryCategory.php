@@ -8,6 +8,6 @@ class SecondaryCategory extends Model
 {
     public function primaryCategory()
     {
-        return $this->belongsTo(primaryCategory::class);
+        return $this->belongsTo(PrimaryCategory::class);
     }
 }
