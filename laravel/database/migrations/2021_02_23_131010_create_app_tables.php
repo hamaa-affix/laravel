@@ -49,8 +49,7 @@ class CreateAppTables extends Migration
             $table->string('image_file_name');
             $table->text('description');
             $table->unsignedInteger('price');
-            $table->string('state')->nullable();
-
+            $table->string('state');
 
             $table->timestamps();
 
