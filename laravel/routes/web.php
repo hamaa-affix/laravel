@@ -20,9 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')
-->group(function () {
-    Route::get('sell', 'SellController@showSellForm')->name('sell');
-});
+    ->group(function () {
+        Route::get('sell', 'SellController@showSellForm')->name('sell');
+        Route::post('sell', 'SellController@sellItem')->name('sell');
+    });
 
 Route::prefix('mypage')
     ->namespace('MyPage')
