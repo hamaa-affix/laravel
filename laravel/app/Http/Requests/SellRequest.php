@@ -25,6 +25,7 @@ class SellRequest extends FormRequest
     {
         return [
             'name'        => ['required', 'string', 'max:255'],
+            'item-image'  => ['required', 'file', 'image'],
             'description' => ['required', 'string', 'max:2000'],
             'category'    => ['required', 'integer'],
             'condition'   => ['required', 'integer'],
@@ -37,6 +38,7 @@ class SellRequest extends FormRequest
     {
         return [
             'name' => '商品名',
+            'item-image' => '商品画像',
             'description' => '商品説明',
             'category' => 'カテゴリー',
             'condition' => '商品状態',
