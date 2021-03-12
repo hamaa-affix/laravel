@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('top');
+
+Route::get('/', 'ItemsController@showItems')->name('top');
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('top');
+
 
 Auth::routes();
 
