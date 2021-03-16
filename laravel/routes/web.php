@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// item apis
 Route::get('/', 'ItemsController@showItems')->name('top');
+Route::get('items/{item}', 'ItemsController@showItemDetail')->name('item');
 
 
 // Route::get('/', function () {
@@ -26,14 +27,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('items/{item}', function() {return "商品詳細";})->name('item');
-
-
 Route::middleware('auth')
     ->group(function () {
+        Route::get('items/{item}/buy', function() {return "商品購入画面";})->name('item.buy');
         Route::get('sell', 'SellController@showSellForm')->name('sell');
         Route::post('sell', 'SellController@sellItem')->name('sell');
     });
+
 
 Route::prefix('mypage')
     ->namespace('MyPage')
