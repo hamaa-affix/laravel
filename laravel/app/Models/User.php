@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     public function posts() {
-        return $this->hasMany('App\Post', 'foreig_key');
+        return $this->hasMany('App\Models\Post', 'user_id');
     }
 
     public function soldItems()
