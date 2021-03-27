@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PrimaryCategory;
 
@@ -35,6 +36,11 @@ class Header extends Component
         $categories = PrimaryCategory::with(['secondaryCategories'])->orderBy('sort_no')->get();
         // dd($categories);
 
-        return view('components.header', compact('user', 'categories'));
+        $defaults = [
+            'category' => Request::input('category', ''),
+            'keyword'  => Request::input('keyword', '')
+        ];
+
+        return view('components.header', compact('user', 'categories', 'defaults'));
     }
 }
