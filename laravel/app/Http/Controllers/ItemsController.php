@@ -17,8 +17,6 @@ class ItemsController extends Controller
             //list() -> 配列の要素を引数に指定した変数に格納する。jsでいう分割代入している
                 list($categoryType, $categoryID) = explode(':', $request->input('category'));
 
-                dd($categoryType);
-
             if ($categoryType === 'primary') {
                 $query->whereHas('secondaryCategory', function ($query) use ($w) {
                     $query->where('primary_category_id', $categoryID);
