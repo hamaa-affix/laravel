@@ -18,7 +18,7 @@ class ItemsController extends Controller
                 list($categoryType, $categoryID) = explode(':', $request->input('category'));
 
             if ($categoryType === 'primary') {
-                $query->whereHas('secondaryCategory', function ($query) use ($w) {
+                $query->whereHas('secondaryCategory', function ($query) use ($categoryID) {
                     $query->where('primary_category_id', $categoryID);
                 });
             } else if ($categoryType === 'secondary') {
@@ -55,5 +55,15 @@ class ItemsController extends Controller
     public function showItemDetail (Item $item)
     {
         return view('items.item_detail', compact('item'));
+    }
+
+    public function showBuyItemForm(Item $item)
+    {
+        //abort(404)のヘルパーをコールすることで簡単に予期しないアクセスを、Not Foundのエラーページの表示ができます HTTP Exception なの404をthorwしているということ。なのでretureは必要ない。
+        if(!$item->isStateSelling) {
+            abort(404);
+        }
+
+        return view('items.item_buy_form',compact('item'));
     }
 }
