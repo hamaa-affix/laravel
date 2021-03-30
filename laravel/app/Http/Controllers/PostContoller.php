@@ -18,22 +18,9 @@ class PostContoller extends Controller
     public function index()
     {
         $post_list = $this->post_service->getlist();
-        dd($post_list);
     }
 
     public function create() {
         return view('posts.create');
-    }
-
-    public function show() {
-
-    }
-
-    public function edit() {
-
-    }
-
-    public function destory() {
-
     }
 }
