@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{$item->name}} | 商品購入
+{{$item->name}} | 商品購入
 @endsection
 
 @section('content')
@@ -12,15 +12,15 @@
             <div class="row mt-3">
                 <div class="col-8 offset-2">
                     @if (session('message'))
-                        <div class="alert alert-{{ session('type', 'success') }}" role="alert">
-                            {{ session('message') }}
-                        </div>
+                    <div class="alert alert-{{ session('type', 'success') }}" role="alert">
+                        {{ session('message') }}
+                    </div>
                     @endif
                 </div>
             </div>
 
             @include('items.item_detail_panel', [
-                'item' => $item
+            'item' => $item
             ])
 
             <div class="row">
@@ -28,22 +28,28 @@
                     <div class="card-form-alert alert alert-danger" role="alert" style="display: none"></div>
                     <div class="form-group mt-3">
                         <label for="number-form">カード番号</label>
-                        <div id="number-form" class="form-control"><!-- ここにカード番号入力フォームが生成されます --></div>
+                        <div id="number-form" class="form-control">
+                            <!-- ここにカード番号入力フォームが生成されます -->
+                        </div>
                     </div>
                     <div class="form-group mt-3">
                         <label for="expiry-form">有効期限</label>
-                        <div id="expiry-form" class="form-control"><!-- ここに有効期限入力フォームが生成されます --></div>
+                        <div id="expiry-form" class="form-control">
+                            <!-- ここに有効期限入力フォームが生成されます -->
+                        </div>
                     </div>
                     <div class="form-group mt-3">
                         <label for="expiry-form">セキュリティコード</label>
-                        <div id="cvc-form" class="form-control"><!-- ここにCVC入力フォームが生成されます --></div>
+                        <div id="cvc-form" class="form-control">
+                            <!-- ここにCVC入力フォームが生成されます -->
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-3 mb-3">
                 <div class="col-8 offset-2">
-                    <button class="btn btn-secondary btn-block">購入</button>
+                    <button class="btn btn-secondary btn-block" onclick="onSubmit(e)">購入</button>
                 </div>
             </div>
 
@@ -57,6 +63,7 @@
 <script>
     var payjp = Payjp('{{config("payjp.public_key")}}')
 
+    console.log("show card",payjp);
     var elements = payjp.elements()
 
     var numberElement = elements.create('cardNumber')
@@ -65,6 +72,21 @@
     numberElement.mount('#number-form')
     expiryElement.mount('#expiry-form')
     cvcElement.mount('#cvc-form')
+
+    const onSubmit = (e) => {
+        const msgDom = document.querySelector('.card-form-alert');
+        msgDom.style.display = "none";
+
+        payjp.createToken(numberElement).then(function(r) {
+            if (r.error) {
+                msgDom.innerText = r.error.message;
+                msgDom.style.display = "block";
+                return;
+            }
+
+            document.querySelector('#card-token').value = r.id;
+            document.querySelector('#buy-form').submit();
+        })
+    }
 </script>
 @endsection
-
